@@ -1,0 +1,44 @@
+ALGORITMO: Caesar Cypher
+------------------------------
+
+VARIABILI E TIPI:
+  - scelta1_utente: str
+  - messaggio: str
+  - shift_num: int
+  - go_again: str
+  - scelta2_utente: str
+
+COSTANTI:
+  - ALFABETO: array
+
+INIZIO:
+  Funzione encode_and_decode(direzione,testo,shift): str
+		risultato = []
+		Se direzione == 'decode'
+			shift = shift*(-1)
+		fine Se
+  		Per ogni carattere in testo
+		Se carattere è in ALFABETO
+			pos_attuale <--- indice di carattere in ALFABETO
+			nuova_pos <--- (pos_attuale + shift) % lunghezza dell'alfabeto
+			risultato <--- aggiungi ALFABETO[nuova_pos]
+		Altriment
+			risultato <--- aggiungi carattere
+		fine Se
+		return risultato trasformato in str
+  CICLO:
+  scrivi("Type 'encode' to encrypt, type 'decode' to decrypt: ")
+  leggi(scelta1_utente)
+  scrivi("Type your message: ")
+  leggi(messaggio)
+  scrivi("Type the shift number: ")
+  leggi(shift_num)
+  scrivi("Here's the encoded result: ",encode_and_decode(scelta_utente1,messaggio,shift_num))
+  scrivi("Type 'yes' if you want to go again. Otherwise type 'no'.")
+  leggi(scelta2_utente)
+  Se scelta2_utente == 'no'
+		go_again = False
+		scrivi("Bye Bye")
+  fine Se
+  Fine CICLO
+FINE
