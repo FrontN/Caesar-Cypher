@@ -68,26 +68,27 @@ def get_valid_nb(prompt: str):
 
 def encode_and_decode(choice: str, text: str, shift: int):
     """
-    Encodes or decodes a given text using the Caesar Cypher algorithm.
+    Encodes or decodes a given text using the Caesar cipher.
 
     Parameters
     ----------
     choice : str
-        The direction of the encoding/decoding. 'encode' for encoding, 'decode' for decoding.
+        Either 'encode' or 'decode'. If 'decode', the shift is multiplied by -1.
     text : str
-        The text to be encoded/decoded.
+        The text to encode or decode.
     shift : int
-        The shift number to be used in the encoding/decoding.
+        The number of positions each letter in the text should be shifted.
 
     Returns
     -------
     str
-        The encoded/decoded text.
+        The encoded or decoded text.
     """
     if choice.startswith("d"):
         shift = shift * (-1)
-    result = [ALPHABET[(ALPHABET.index(char) + shift) % len(ALPHABET)] for char in text if char in ALPHABET]
+    result = [(ALPHABET[(ALPHABET.index(char) + shift) % len(ALPHABET)]) if char in ALPHABET else char for char in text]
     return "".join(result)
+
 
 def main():
     """
@@ -98,8 +99,7 @@ def main():
     result is then printed and the user is asked if they want to go again.
     If the user types 'no' or 'n', the loop is exited and the program ends.
     """
-    keep_going = True
-    while keep_going:
+    while True:
         clear_screen()
         choice = get_valid_input("Type 'encode' to encrypt, type 'decode' to decrypt: ", ["encode", "encrypt", "decrypt", "decode"])
         clear_screen()
@@ -108,9 +108,10 @@ def main():
         shift = get_valid_nb("Type the shift number: ")
         print(f"Here's the {choice}d result: {encode_and_decode(choice, message, shift)}")
         play_again = get_valid_input("Type 'yes' if you want to go again. Otherwise type 'no': ", ["yes", "no", "y", "n"])
+        
         if play_again.startswith("n"):
-            keep_going = False
             print("Bye Bye!!")
+            break
 
 if __name__ == "__main__":
     main()

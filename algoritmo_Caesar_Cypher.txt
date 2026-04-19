@@ -2,43 +2,32 @@ ALGORITMO: Caesar Cypher
 ------------------------------
 
 VARIABILI E TIPI:
-  - scelta1_utente: str
-  - messaggio: str
-  - shift_num: int
-  - go_again: str
-  - scelta2_utente: str
+  - play_again: str
+  - choice: str
+  - text: str
+  - shift: int
+  - keep_going: bool
 
 COSTANTI:
   - ALFABETO: array
+  - funzione encode_and_decode: prende 3 parametri, choice, text e shift codifica/decodifica in base
+    alla scelta dell'utente il testo usando il shift. ritorna il testo codificato/decodificato
 
 INIZIO:
-  Funzione encode_and_decode(direzione,testo,shift): str
-		risultato = []
-		Se direzione == 'decode'
-			shift = shift*(-1)
-		fine Se
-  		Per ogni carattere in testo
-		Se carattere è in ALFABETO
-			pos_attuale <--- indice di carattere in ALFABETO
-			nuova_pos <--- (pos_attuale + shift) % lunghezza dell'alfabeto
-			risultato <--- aggiungi ALFABETO[nuova_pos]
-		Altriment
-			risultato <--- aggiungi carattere
-		fine Se
-		return risultato trasformato in str
-  CICLO:
-  scrivi("Type 'encode' to encrypt, type 'decode' to decrypt: ")
-  leggi(scelta1_utente)
-  scrivi("Type your message: ")
-  leggi(messaggio)
-  scrivi("Type the shift number: ")
-  leggi(shift_num)
-  scrivi("Here's the encoded result: ",encode_and_decode(scelta_utente1,messaggio,shift_num))
-  scrivi("Type 'yes' if you want to go again. Otherwise type 'no'.")
-  leggi(scelta2_utente)
-  Se scelta2_utente == 'no'
-		go_again = False
-		scrivi("Bye Bye")
-  fine Se
-  Fine CICLO
+  keep_going <--- True
+  finche keep_going:
+    scrivi("Type 'encode' to encrypt, type 'decode' to decrypt: ")
+    leggi(choice)
+    scrivi("Type your message: ")
+    leggi(text)
+    scrivi("Type the shift number: ")
+    leggi(shift)
+    scrivi("Here's the encoded/decoded result: ",encode_and_decode)
+    scrivi("Type 'yes' if you want to go again. Otherwise type 'no'.")
+    leggi(play_again)
+
+    Se play_again è uguale a 'no'
+      keep_going = False
+      scrivi("Bye Bye")
+    fine Se
 FINE
